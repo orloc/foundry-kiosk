@@ -1,0 +1,16 @@
+<div ng-include="'views/header.html'"></div>
+<div ng-controller="eventDataCtrl">
+  <section ng-repeat="(name,e) in events">
+    <h2>{{ name }}</h2>
+    <hr/>
+    <div class="row">
+      <article class=" col-md-4 col-xs-6" ng-repeat="event in e">
+        <h4>{{ event.title }}</h4>
+        <p ng-bind-html="event.summary"></p>
+      </article>
+    </div>
+    <br/>
+    <br/>
+  </section>
+</div> 
+
