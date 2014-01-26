@@ -7,6 +7,11 @@ class Preprocessor {
 
 		foreach($xml->entry as $k => $child){
 			$meta = $this->transformToDateTime($child->summary);
+			$child->addChild('meta')
+				->addChild('start', $meta['start']);
+
+			$child->meta->addChild('end', $meta['end']);
+
 			$entries[] = $child;
 		}
 
@@ -15,20 +20,23 @@ class Preprocessor {
 
 
 	public function transformToDateTime(\SimpleXmlElement $element) { 
-		$times = $this->parseSummaryForDate($element);
+		extract($this->parseSummaryForDate($element));
 
-		$startTime = new \DateTime($start.' '.$tz);
+		// if we cant convert the string disregard the meta data
+		try { 
+			$startTime = new \DateTime($start.' '.$timezone);
 
-		$endTime = strlen($end) > 4 
-			? new \DateTime($end.' '.$tz) 
-			: ;
+			if (strlen($end) > 4) { 
+				$endTime = new \DateTime($end.' '.$timezone);
+			} else { 
+				$date = substr($start, 0, strpos($start, ',')+6);
 
-		$meta = array(
-			'start' => new \DateTime(''),
-			'end' => new \DateTime('')
-		);
+				$endTime = new \DateTime($date.' '.$timezone);
+			}
 
-		return $meta;
+			return array ('start' => $startTime->format('Y-m-d H:i:s e'), 'end' => $endTime->format('Y-m-d H:i:s e'));
+		} catch(\Exception $e) { 
+		}
 	}
 
 	public function formatKey($string){
@@ -42,7 +50,6 @@ class Preprocessor {
 	 */
 	private function parseSummaryForDate(\SimpleXmlElement $summary) {
 		$str = strtolower($summary->__toString());
-
 		$duration = substr($str, 0, strpos($str,'<br>'));
 
 		$start = substr($duration, 6, strpos($duration, ' to ') - 6);
@@ -51,11 +58,8 @@ class Preprocessor {
 			(strpos($duration, 'to')+3), 
 			strlen(substr($duration, (strpos($duration, 'to')+3)))-10
 		);
-
 		$tz = substr($duration, -3);
 
-		var_dump($start, $end, $tz);
-
-		return array ($start,$end,$tz);
+		return array ('start' => $start, 'end' => $end, 'timezone' => $tz);
 	}
 }

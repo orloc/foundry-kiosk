@@ -9,3 +9,5 @@ app.controller('eventDataCtrl', function ($scope, $http) {
 		$scope.events = response.data;
 	});
 });
+
+
