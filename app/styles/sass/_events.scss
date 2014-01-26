@@ -1,0 +1,31 @@
+#mason-container { 
+ 	width: 105%;
+ 	margin: 0 auto;
+ 	.item { 
+ 		width: 23%;
+ 	 	margin: 5px;
+		color: #000;
+
+ 	 	h4 { 
+ 	 		font-weight: 800;
+		}
+
+		a { 
+			text-decoration: none;
+			padding: 5px;
+			color: #000;
+		}
+ 	}
+}
+.green { 
+	background-color: $green!important;
+	border-radius:10px;
+ }
+
+.tan { 
+	background-color: $body-color!important;
+	border-radius:10px;
+	h4 { 
+	 	color: $orange;
+	 }
+ }

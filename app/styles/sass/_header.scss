@@ -1,0 +1,19 @@
+.jumbotron {
+	background-color: $body-color;
+	padding: 10px;
+	padding-top: 20px;
+}
+.navbar {
+	background-color: $gold;
+	border: 0;
+	ul { 
+		li a {
+			color: $green;
+			font-size: 22px;
+			&:hover { 
+			 	background-color: $red;
+			 	color: $body-color;
+			}
+		}
+	}
+}
