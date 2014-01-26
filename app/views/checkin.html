@@ -1,3 +1,19 @@
 <div ng-include="'views/header.html'"></div>
 <h2>Pick an Active Event!</h2>
+<div ng-controller="checkinCtrl">
+  <div ng-repeat="(name,e) in events">
+    <div class="row">
+      <div ng-repeat="event in e" >
+        <span ng-if="testcase(event.meta.group)">
+          {{ event | isActive}}
+        </span>
+        <span ng-if="event | isActive">
+          <h3>{{ name }}</h3>
+          <h4>{{ event.title }}</h4>
+        </span>
+      </div>
+    </div>
+    
+  </div>
+</div>
 
