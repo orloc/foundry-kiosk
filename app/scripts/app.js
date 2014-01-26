@@ -15,6 +15,9 @@ angular.module('kioskApp', [
       .when('/events', { 
 	  	templateUrl: 'views/main.html',
 	  })
+	  .when('/events/checkin/:group/:id', {
+	  	  templateUrl: 'views/checkin_detail.html'
+	  })
       .otherwise({
         redirectTo: '/'
       });
