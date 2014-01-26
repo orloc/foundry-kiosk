@@ -1,4 +1,8 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once __DIR__.'/vendor/autoload.php';
 
 $config = require_once __DIR__.'/config/config.php';
@@ -25,15 +29,34 @@ echo json_encode($xmlResponses, true);
 function filterXmlResponse(\SimpleXmlElement $xml){ 
 	$entries = array();
 
-	$count = 0;
 	foreach($xml->entry as $k => $child){
-		if ($count){ 
-			$entries[] = $child;
-		}
-		$count++;
+		$meta = parseSummaryForDate($child->summary);
+		$entries[] = $child;
 	}
 
 	return $entries;
+}
+
+/*
+ * Manipulates summary field to find start and end dates
+ * @var \SimpleXmlElement
+ * @return array
+ */
+function parseSummaryForDate(\SimpleXmlElement $summary) {
+	$str = strtolower($summary->__toString());
+
+	$duration = substr($str, 0, strpos($str,'<br>'));
+
+	$start = substr($duration, 6, strpos($duration, ' to ') - 6);
+
+	$end = substr($duration, 
+		(strpos($duration, 'to')+3), 
+		strlen(substr($duration, (strpos($duration, 'to')+3)))-10
+	);
+
+	$tz = substr($duration, -3);
+
+	var_dump($duration, $start, $end, $tz);
 }
 
 function formatKey($string){
