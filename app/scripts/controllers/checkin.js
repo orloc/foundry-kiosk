@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('kioskApp')
-  .controller('checkinCtrl', function ($scope,filterActive) {
+  .controller('checkinCtrl', function ($scope) {
 	  
 });

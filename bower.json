@@ -11,6 +11,7 @@
     "angular-cookies": "1.2.6",
     "angular-sanitize": "1.2.6",
     "angular-route": "1.2.6",
+    "angular-masonry": "~0.7.0",
     "pace": "~0.4.17"
   },
   "devDependencies": {

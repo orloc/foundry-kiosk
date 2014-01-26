@@ -2,17 +2,22 @@
 
 class Preprocessor { 
 
-	public function filterXmlResponse(\SimpleXmlElement $xml){ 
+	public function enhanceXmlResponse(\SimpleXmlElement $xml, $group){ 
 		$entries = array();
 
+		$index = 0;
 		foreach($xml->entry as $k => $child){
 			$meta = $this->transformToDateTime($child->summary);
 			$child->addChild('meta')
 				->addChild('start', $meta['start']);
 
 			$child->meta->addChild('end', $meta['end']);
+			$child->meta->addChild('index', $index);
+			$child->meta->addChild('group', $group);
 
 			$entries[] = $child;
+
+			$index++;
 		}
 
 		return $entries;

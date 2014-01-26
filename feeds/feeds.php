@@ -14,11 +14,12 @@ $feeds = $config['feeds'];
 
 $xmlResponses = array();
 
+$count = 0;
 foreach ($feeds as $name => $uri) { 
 	$request = $client->get($uri);
 	$response = $request->send();
 
-	$xmlResponses[$preProcessor->formatKey($name)] = $preProcessor->filterXmlResponse($response->xml());
+	$xmlResponses[$preProcessor->formatKey($name)] = $preProcessor->enhanceXmlResponse($response->xml(), $name);
 }
 
 echo json_encode($xmlResponses, true);
