@@ -4,14 +4,17 @@ angular.module('kioskApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ui.router'
 ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $httpProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/checkin.html',
       })
+      .when('/events', { 
+	  	templateUrl: 'views/main.html',
+	  })
       .otherwise({
         redirectTo: '/'
       });
