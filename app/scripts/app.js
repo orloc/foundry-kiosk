@@ -4,8 +4,7 @@ angular.module('kioskApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute',
-  'ui.router'
+  'ngRoute'
 ])
   .config(function ($routeProvider, $httpProvider) {
     $routeProvider
