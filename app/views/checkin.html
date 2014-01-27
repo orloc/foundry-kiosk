@@ -1,12 +1,13 @@
 <div ng-include="'views/header.html'"></div>
-<h2>Pick an Active Event!</h2>
-<div ng-repeat="(name,e) in events">
-  <div ng-repeat="event in e" >
-    <div class="activeEvent" ng-class="{activeTan: !($index%2)}" ng-if="event | isActive">
-      <h3>{{ name }} <a href="#/events/checkin/{{event.meta.group}}/{{ event.meta.index }}" class="btn btn-default btn-lg pull-right">Check In!</a></h3>
-        <h4>{{ event.title }}</h4>
-        <p ng-bind-html="event.content"></p>
+<section class="event-group">
+  <h2>Pick an Active Event!</h2>
+  <div ng-repeat="(name,e) in events">
+    <div ng-repeat="event in e" >
+      <div class="activeEvent" ng-class="{activeTan: !($index%2)}" ng-if="event | isActive">
+        <h3>{{ name }} <a href="#/events/checkin/{{event.meta.group}}/{{ event.meta.index }}" class="btn btn-default btn-lg pull-right">Check In!</a></h3>
+          <h4>{{ event.title }}</h4>
+          <p ng-bind-html="event.content"></p>
+      </div>
     </div>
   </div>
-</div>
-
+</section>

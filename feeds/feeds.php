@@ -19,7 +19,9 @@ foreach ($feeds as $name => $uri) {
 	$request = $client->get($uri);
 	$response = $request->send();
 
-	$xmlResponses[$preProcessor->formatKey($name)] = $preProcessor->enhanceXmlResponse($response->xml(), $name);
+	$arr = json_decode(json_encode($preProcessor->enhanceXmlResponse($response->xml(), $name), true));
+	$xmlResponses[$preProcessor->formatKey($name)] = array_reverse($arr);
+		
 }
 
 echo json_encode($xmlResponses, true);
