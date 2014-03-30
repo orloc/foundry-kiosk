@@ -3,7 +3,7 @@
     <h2>{{ name }}</h2>
     <hr/>
     <div class="row">
-      <div id="mason-container" masonry="(gutter: '2')">
+      <div id="mason-container" masonry preserve-order>
         <div ng-class="{tan: !($index%2), green:($index%2)}" class="masonry-brick col-md-4 col-xs-4 item" ng-repeat="event in e" ng-if="event | upcomming">
             <h4>{{ event.title }}</h4>
             <p ng-bind-html="event.summary"></p>
